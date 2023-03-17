@@ -36,4 +36,8 @@
   .sidebar-step--active {
     @apply text-marine-blue bg-pastel-blue border-pastel-blue;
   }
+
+  .form-height {
+    height: calc(100% - 110px);
+  }
 }
