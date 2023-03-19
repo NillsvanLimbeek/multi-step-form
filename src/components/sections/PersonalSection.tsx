@@ -1,5 +1,7 @@
 import { Component } from 'solid-js';
-import { useForm } from '../../context/use-form';
+
+import { useForm } from '@lib/context/use-form';
+
 import { InputField } from '../InputField';
 import { SectionHeader } from '../SectionHeader';
 

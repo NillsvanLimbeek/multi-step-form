@@ -1,8 +1,8 @@
 import { createContext, useContext, ParentComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
-import { defaultState } from '../constants/default-state';
-import { Field, FormContextState, FormContextValue } from '../types';
+import { defaultState } from '@lib/constants/default-state';
+import { Field, FormContextState, FormContextValue } from '@lib/types';
 
 const FormContext = createContext<FormContextValue>([
   defaultState,

@@ -1,7 +1,9 @@
 import { Component, createEffect, Show } from 'solid-js';
-import { PersonalSection } from './components/sections/PersonalSection';
-import { Sidebar } from './components/Sidebar';
-import { useForm } from './context/use-form';
+
+import { useForm } from '@lib/context/use-form';
+
+import { PersonalSection } from '@components/sections/PersonalSection';
+import { Sidebar } from '@components/Sidebar';
 
 const App: Component = () => {
   const [form] = useForm();

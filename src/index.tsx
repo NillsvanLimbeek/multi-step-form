@@ -2,8 +2,8 @@
 import { render } from 'solid-js/web';
 
 import App from './App';
-import { FormProvider } from './context/use-form';
-import { defaultState } from './constants/default-state';
+import { FormProvider } from '@lib/context/use-form';
+import { defaultState } from '@lib/constants/default-state';
 
 import './index.css';
 

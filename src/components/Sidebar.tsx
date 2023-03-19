@@ -1,5 +1,7 @@
 import { Component, createSignal } from 'solid-js';
+
 import bg from '../assets/images/bg-sidebar-desktop.svg';
+
 import { SidebarStep } from './SidebarStep';
 
 interface Props {
