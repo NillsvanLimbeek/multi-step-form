@@ -24,20 +24,20 @@
   html,
   body,
   #root {
-    @apply w-full h-full;
+    @apply h-full w-full;
   }
 }
 
 @layer components {
   .sidebar-step {
-    @apply border border-white p-5 rounded-full text-white h-8 w-8 flex justify-center items-center mr-4  font-medium;
+    @apply mr-4 flex h-8 w-8 items-center justify-center rounded-full border border-white p-5 font-medium  text-white;
   }
 
   .sidebar-step--active {
-    @apply text-marine-blue bg-pastel-blue border-pastel-blue;
+    @apply border-pastel-blue bg-pastel-blue text-marine-blue;
   }
 
   .form-height {
-    height: calc(100% - 110px);
+    height: calc(100% - 135px);
   }
 }

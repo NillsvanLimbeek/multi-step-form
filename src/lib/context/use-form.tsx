@@ -1,14 +1,22 @@
 import { createContext, useContext, ParentComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
-import { defaultState } from '@lib/constants/default-state';
-import { Field, FormContextState, FormContextValue } from '@lib/types';
+import { defaultState } from '@lib/constants';
+import {
+  Field,
+  FormContextState,
+  FormContextValue,
+  Personal,
+  PersonalSchema,
+} from '@lib/types';
+import { setPersonalErrors, clearPersonalErrors } from '@lib/data';
 
 const FormContext = createContext<FormContextValue>([
   defaultState,
   {
     updateCurrentSection: () => undefined,
     updatePersonalField: () => undefined,
+    handlePersonalSubmit: () => undefined,
   },
 ]);
 
@@ -20,6 +28,7 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
       phoneNumber:
         props.personal.phoneNumber ?? defaultState.personal.phoneNumber,
     },
+    errors: {},
     currentSection: props.currentSection ?? defaultState.currentSection,
   });
 
@@ -31,9 +40,24 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
     setState('personal', field, value);
   }
 
+  function handlePersonalSubmit(values: Personal) {
+    const test = PersonalSchema.safeParse(values);
+
+    if (!test.success) {
+      const err = test.error.flatten().fieldErrors;
+      setState('errors', setPersonalErrors(err));
+    } else {
+      setState('errors', clearPersonalErrors());
+      setState('currentSection', 2);
+    }
+  }
+
   return (
     <FormContext.Provider
-      value={[state, { updateCurrentSection, updatePersonalField }]}
+      value={[
+        state,
+        { updateCurrentSection, updatePersonalField, handlePersonalSubmit },
+      ]}
     >
       {props.children}
     </FormContext.Provider>

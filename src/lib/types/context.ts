@@ -3,6 +3,7 @@ import { Personal } from './personal';
 export type FormContextState = {
   currentSection: number;
   personal: Personal;
+  errors: Partial<Personal>;
 };
 
 export type FormContextValue = [
@@ -10,6 +11,7 @@ export type FormContextValue = [
   actions: {
     updateCurrentSection: (e: number) => void;
     updatePersonalField: (field: Field, value: string) => void;
+    handlePersonalSubmit: (values: Personal) => void;
   }
 ];
 

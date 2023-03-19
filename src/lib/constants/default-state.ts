@@ -7,4 +7,5 @@ export const defaultState: FormContextState = {
     email: '',
     phoneNumber: '',
   },
+  errors: {},
 };

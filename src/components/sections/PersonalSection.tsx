@@ -6,7 +6,7 @@ import { InputField } from '../InputField';
 import { SectionHeader } from '../SectionHeader';
 
 export const PersonalSection: Component = () => {
-  const [form, { updateCurrentSection, updatePersonalField }] = useForm();
+  const [form, { updatePersonalField, handlePersonalSubmit }] = useForm();
 
   return (
     <section class="px-28 pt-10">
@@ -19,23 +19,25 @@ export const PersonalSection: Component = () => {
         class="form-height"
         onSubmit={(e) => {
           e.preventDefault();
-          updateCurrentSection(2);
-          // handleSubmit(form.personal);
+          handlePersonalSubmit(form.personal);
         }}
       >
         <InputField
           label="name"
           value={form.personal.name}
+          error={form.errors.name}
           setValue={(e) => updatePersonalField('name', e)}
         />
         <InputField
           label="email"
           value={form.personal.email}
+          error={form.errors.email}
           setValue={(e) => updatePersonalField('email', e)}
         />
         <InputField
           label="phone number"
           value={form.personal.phoneNumber}
+          error={form.errors.phoneNumber}
           setValue={(e) => updatePersonalField('phoneNumber', e)}
         />
 
