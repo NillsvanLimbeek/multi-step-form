@@ -2,6 +2,10 @@ import { Component, createSignal } from 'solid-js';
 import bg from '../assets/images/bg-sidebar-desktop.svg';
 import { SidebarStep } from './SidebarStep';
 
+interface Props {
+  activeSection: number;
+}
+
 const STEPS: { index: number; title: string }[] = [
   { index: 1, title: 'your info' },
   { index: 2, title: 'select plan' },
@@ -9,8 +13,8 @@ const STEPS: { index: number; title: string }[] = [
   { index: 4, title: 'summary' },
 ];
 
-export const Sidebar: Component = () => {
-  const [active, setActive] = createSignal(1);
+export const Sidebar: Component<Props> = (props) => {
+  // const [active, setActive] = createSignal(1);
 
   return (
     <aside class="relative">
@@ -21,7 +25,7 @@ export const Sidebar: Component = () => {
           <SidebarStep
             index={index}
             title={title}
-            active={index === active()}
+            active={index === props.activeSection}
           />
         ))}
       </div>
