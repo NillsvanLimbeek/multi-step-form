@@ -1,9 +1,10 @@
-import { Component, createEffect, Show } from 'solid-js';
+import { Component, createEffect, Match, Show, Switch } from 'solid-js';
 
 import { useForm } from '@lib/context/use-form';
 
 import { PersonalSection } from '@components/sections/PersonalSection';
 import { Sidebar } from '@components/Sidebar';
+import { PlanSection } from '@components/sections/PlanSection';
 
 const App: Component = () => {
   const [form] = useForm();
@@ -13,7 +14,15 @@ const App: Component = () => {
       <div class="flex rounded-xl bg-white p-5">
         <Sidebar activeSection={form.currentSection} />
 
-        <PersonalSection />
+        <Switch>
+          <Match when={form.currentSection === 1}>
+            <PersonalSection />
+          </Match>
+
+          <Match when={form.currentSection === 2}>
+            <PlanSection />
+          </Match>
+        </Switch>
       </div>
     </main>
   );
