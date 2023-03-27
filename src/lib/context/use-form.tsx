@@ -8,6 +8,7 @@ import {
   FormContextValue,
   Personal,
   PersonalSchema,
+  PlanInput,
 } from '@lib/types';
 import { setPersonalErrors, clearPersonalErrors } from '@lib/data';
 
@@ -17,6 +18,7 @@ const FormContext = createContext<FormContextValue>([
     updateCurrentSection: () => undefined,
     updatePersonalField: () => undefined,
     handlePersonalSubmit: () => undefined,
+    updateCurrentPlan: () => undefined,
   },
 ]);
 
@@ -30,6 +32,10 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
     },
     errors: {},
     currentSection: props.currentSection ?? defaultState.currentSection,
+    plan: {
+      period: props.plan.period ?? defaultState.plan.period,
+      type: props.plan.type ?? defaultState.plan.type,
+    },
   });
 
   function updateCurrentSection(e: number) {
@@ -52,11 +58,24 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
     }
   }
 
+  function updateCurrentPlan(e: PlanInput) {
+    if (e.field === 'type') {
+      setState('plan', 'type', e.value);
+    } else {
+      setState('plan', 'period', e.value);
+    }
+  }
+
   return (
     <FormContext.Provider
       value={[
         state,
-        { updateCurrentSection, updatePersonalField, handlePersonalSubmit },
+        {
+          updateCurrentSection,
+          updatePersonalField,
+          handlePersonalSubmit,
+          updateCurrentPlan,
+        },
       ]}
     >
       {props.children}

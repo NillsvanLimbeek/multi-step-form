@@ -8,4 +8,8 @@ export const defaultState: FormContextState = {
     phoneNumber: '',
   },
   errors: {},
+  plan: {
+    period: true,
+    type: 'advanced',
+  },
 };
