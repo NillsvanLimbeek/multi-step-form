@@ -1,33 +1,26 @@
+import { CurrentSection } from '@/lib/types';
 import { Component, createSignal } from 'solid-js';
 
 import bg from '../assets/images/bg-sidebar-desktop.svg';
+import { STEPS } from '@/lib/constants/steps';
 
 import { SidebarStep } from './SidebarStep';
 
 interface Props {
-  activeSection: number;
+  activeSection: CurrentSection;
 }
 
-const STEPS: { index: number; title: string }[] = [
-  { index: 1, title: 'your info' },
-  { index: 2, title: 'select plan' },
-  { index: 3, title: 'add-ons' },
-  { index: 4, title: 'summary' },
-];
-
 export const Sidebar: Component<Props> = (props) => {
-  // const [active, setActive] = createSignal(1);
-
   return (
     <aside class="relative">
       <img src={bg} alt="sidebar background" />
 
       <div class="absolute top-10 left-10">
-        {STEPS.map(({ index, title }) => (
+        {STEPS.map((step, index) => (
           <SidebarStep
-            index={index}
-            title={title}
-            active={index === props.activeSection}
+            index={index + 1}
+            title={step.title}
+            active={step.section === props.activeSection}
           />
         ))}
       </div>

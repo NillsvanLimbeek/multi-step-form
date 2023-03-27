@@ -1,3 +1,4 @@
+import { CurrentSection } from '@/lib/types';
 import classNames from 'classnames';
 import { Component } from 'solid-js';
 
@@ -9,7 +10,7 @@ interface Props {
 
 export const SidebarStep: Component<Props> = (props) => {
   return (
-    <div class="flex items-center mb-8">
+    <div class="mb-8 flex items-center">
       <div
         class={classNames('sidebar-step', {
           'sidebar-step--active': props.active,
@@ -19,8 +20,8 @@ export const SidebarStep: Component<Props> = (props) => {
       </div>
 
       <div>
-        <p class="uppercase text-light-gray text-sm">Step {props.index}</p>
-        <p class="uppercase text-white font-medium">{props.title}</p>
+        <p class="text-sm uppercase text-light-gray">Step {props.index}</p>
+        <p class="font-medium uppercase text-white">{props.title}</p>
       </div>
     </div>
   );

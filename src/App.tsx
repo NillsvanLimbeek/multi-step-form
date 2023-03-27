@@ -1,4 +1,4 @@
-import { Component, createEffect, Match, Show, Switch } from 'solid-js';
+import { Component, Match, Switch } from 'solid-js';
 
 import { useForm } from '@lib/context/use-form';
 
@@ -15,11 +15,11 @@ const App: Component = () => {
         <Sidebar activeSection={form.currentSection} />
 
         <Switch>
-          <Match when={form.currentSection === 1}>
+          <Match when={form.currentSection === 'personal'}>
             <PersonalSection />
           </Match>
 
-          <Match when={form.currentSection === 2}>
+          <Match when={form.currentSection === 'plan'}>
             <PlanSection />
           </Match>
         </Switch>

@@ -3,6 +3,7 @@ import { createStore } from 'solid-js/store';
 
 import { defaultState } from '@lib/constants';
 import {
+  CurrentSection,
   Field,
   FormContextState,
   FormContextValue,
@@ -38,7 +39,7 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
     },
   });
 
-  function updateCurrentSection(e: number) {
+  function updateCurrentSection(e: CurrentSection) {
     setState('currentSection', e);
   }
 
@@ -54,7 +55,7 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
       setState('errors', setPersonalErrors(err));
     } else {
       setState('errors', clearPersonalErrors());
-      setState('currentSection', 2);
+      setState('currentSection', 'plan');
     }
   }
 

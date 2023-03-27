@@ -1,7 +1,7 @@
 import { FormContextState } from '../types';
 
 export const defaultState: FormContextState = {
-  currentSection: 1,
+  currentSection: 'personal',
   personal: {
     name: '',
     email: '',
