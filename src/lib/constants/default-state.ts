@@ -12,4 +12,5 @@ export const defaultState: FormContextState = {
     period: true,
     type: 'advanced',
   },
+  addOns: [],
 };

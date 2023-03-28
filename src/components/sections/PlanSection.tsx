@@ -1,4 +1,4 @@
-import { Component, createSignal } from 'solid-js';
+import { Component, createSignal, For } from 'solid-js';
 import classNames from 'classnames';
 
 import { PLANS } from '@/lib/constants';
@@ -18,14 +18,16 @@ export const PlanSection: Component = () => {
       />
 
       <div class="mb-7 grid grid-cols-3 gap-4">
-        {PLANS.map((plan) => (
-          <SelectPlan
-            plan={plan}
-            active={plan.title === form.plan.type}
-            updatePlan={(e) => updateCurrentPlan(e)}
-            showMonthly={!form.plan.period}
-          />
-        ))}
+        <For each={PLANS}>
+          {(plan) => (
+            <SelectPlan
+              plan={plan}
+              active={plan.title === form.plan.type}
+              updatePlan={(e) => updateCurrentPlan(e)}
+              showMonthly={!form.plan.period}
+            />
+          )}
+        </For>
       </div>
 
       <div class="flex items-center justify-center gap-4 rounded-md bg-alabaster p-4">
@@ -56,11 +58,16 @@ export const PlanSection: Component = () => {
       <div class="flex h-[33%] w-full items-end justify-between">
         <button
           class="font-semibold text-marine-blue hover:text-blue-800"
-          onClick={() => updateCurrentSection(1)}
+          onClick={() => updateCurrentSection('personal')}
         >
           Go Back
         </button>
-        <button class="btn bg-marine-blue hover:bg-blue-900">Next Step</button>
+        <button
+          class="btn bg-marine-blue hover:bg-blue-900"
+          onClick={() => updateCurrentSection('add-ons')}
+        >
+          Next Step
+        </button>
       </div>
     </section>
   );

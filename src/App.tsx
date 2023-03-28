@@ -5,6 +5,7 @@ import { useForm } from '@lib/context/use-form';
 import { PersonalSection } from '@components/sections/PersonalSection';
 import { Sidebar } from '@components/Sidebar';
 import { PlanSection } from '@components/sections/PlanSection';
+import { AddOnSection } from './components/sections/AddOnSection';
 
 const App: Component = () => {
   const [form] = useForm();
@@ -22,7 +23,13 @@ const App: Component = () => {
           <Match when={form.currentSection === 'plan'}>
             <PlanSection />
           </Match>
+
+          <Match when={form.currentSection === 'add-ons'}>
+            <AddOnSection />
+          </Match>
         </Switch>
+
+        <pre>{JSON.stringify(form, null, 2)}</pre>
       </div>
     </main>
   );

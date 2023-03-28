@@ -3,6 +3,7 @@ import { createStore } from 'solid-js/store';
 
 import { defaultState } from '@lib/constants';
 import {
+  AddOnTitle,
   CurrentSection,
   Field,
   FormContextState,
@@ -20,6 +21,7 @@ const FormContext = createContext<FormContextValue>([
     updatePersonalField: () => undefined,
     handlePersonalSubmit: () => undefined,
     updateCurrentPlan: () => undefined,
+    updateAddOns: () => undefined,
   },
 ]);
 
@@ -37,8 +39,10 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
       period: props.plan.period ?? defaultState.plan.period,
       type: props.plan.type ?? defaultState.plan.type,
     },
+    addOns: [],
   });
 
+  // PERSONAL SECTION
   function updateCurrentSection(e: CurrentSection) {
     setState('currentSection', e);
   }
@@ -59,11 +63,24 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
     }
   }
 
+  // PLANS SECTION
   function updateCurrentPlan(e: PlanInput) {
     if (e.field === 'type') {
       setState('plan', 'type', e.value);
     } else {
       setState('plan', 'period', e.value);
+    }
+  }
+
+  // ADD ONS SECTION
+  function updateAddOns(e: AddOnTitle) {
+    if (state.addOns.includes(e)) {
+      setState(
+        'addOns',
+        state.addOns.filter((addOns) => addOns !== e)
+      );
+    } else {
+      setState('addOns', [...state.addOns, e]);
     }
   }
 
@@ -76,6 +93,7 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
           updatePersonalField,
           handlePersonalSubmit,
           updateCurrentPlan,
+          updateAddOns,
         },
       ]}
     >

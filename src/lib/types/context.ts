@@ -1,5 +1,6 @@
+import { AddOnTitle } from './add-on';
 import { Personal } from './personal';
-import { PeriodType, PlanInput, PlanType } from './plan';
+import { PlanInput, PlanType } from './plan';
 
 type FormContextState = {
   currentSection: CurrentSection;
@@ -9,6 +10,7 @@ type FormContextState = {
     period: boolean; // true : 'year' ? 'month'
     type: PlanType;
   };
+  addOns: AddOnTitle[];
 };
 
 type FormContextValue = [
@@ -18,6 +20,7 @@ type FormContextValue = [
     updatePersonalField: (field: Field, value: string) => void;
     handlePersonalSubmit: (values: Personal) => void;
     updateCurrentPlan: (plan: PlanInput) => void;
+    updateAddOns: (addOn: AddOnTitle) => void;
   }
 ];
 
