@@ -1,14 +1,17 @@
-import { Component, createSignal, For } from 'solid-js';
+import { Component, For } from 'solid-js';
 import classNames from 'classnames';
 
 import { PLANS } from '@/lib/constants';
 import { useForm } from '@/lib/context/use-form';
+import { PlanInput } from '@/lib/types';
 
 import { SectionHeader } from '../SectionHeader';
 import { SelectPlan } from '../SelectPlan';
 
 export const PlanSection: Component = () => {
   const [form, { updateCurrentSection, updateCurrentPlan }] = useForm();
+
+  function updatePlan(e: PlanInput) {}
 
   return (
     <section class="px-28 pt-10">
@@ -24,7 +27,7 @@ export const PlanSection: Component = () => {
               plan={plan}
               active={plan.title === form.plan.type}
               updatePlan={(e) => updateCurrentPlan(e)}
-              showMonthly={!form.plan.period}
+              showMonthly={form.plan.period === 'month'}
             />
           )}
         </For>
@@ -33,22 +36,22 @@ export const PlanSection: Component = () => {
       <div class="flex items-center justify-center gap-4 rounded-md bg-alabaster p-4">
         <p
           class={classNames('font-semibold text-cool-gray', {
-            'text-marine-blue': !form.plan.period,
+            'text-marine-blue': form.plan.period === 'month',
           })}
         >
           Monthly
         </p>
         <input
-          checked={form.plan.period}
+          checked={form.plan.period === 'year'}
           type="checkbox"
           class="toggle toggle-md bg-marine-blue checked:bg-marine-blue"
           onChange={() =>
-            updateCurrentPlan({ field: 'period', value: !form.plan.period })
+            updateCurrentPlan({ field: 'period', value: form.plan.period })
           }
         />
         <p
           class={classNames('font-semibold text-cool-gray', {
-            'text-marine-blue': form.plan.period!,
+            'text-marine-blue': form.plan.period === 'year',
           })}
         >
           Yearly

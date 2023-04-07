@@ -1,8 +1,9 @@
 import { createContext, useContext, ParentComponent } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
-import { defaultState } from '@lib/constants';
+import { ADD_ONS, defaultState } from '@lib/constants';
 import {
+  AddOn,
   AddOnTitle,
   CurrentSection,
   Field,
@@ -11,6 +12,7 @@ import {
   Personal,
   PersonalSchema,
   PlanInput,
+  PlanType,
 } from '@lib/types';
 import { setPersonalErrors, clearPersonalErrors } from '@lib/data';
 
@@ -38,8 +40,9 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
     plan: {
       period: props.plan.period ?? defaultState.plan.period,
       type: props.plan.type ?? defaultState.plan.type,
+      price: props.plan.price ?? defaultState.plan.price,
     },
-    addOns: [],
+    addOns: props.addOns ?? defaultState.addOns,
   });
 
   // PERSONAL SECTION
@@ -64,23 +67,37 @@ export const FormProvider: ParentComponent<FormContextState> = (props) => {
   }
 
   // PLANS SECTION
+  function getPlanPrice(plan: PlanType) {
+    switch (plan) {
+      case 'arcade':
+        return state.plan.period === 'month' ? 9 : 90;
+      case 'advanced':
+        return state.plan.period === 'month' ? 12 : 120;
+      case 'pro':
+        return state.plan.period === 'month' ? 15 : 150;
+    }
+  }
+
   function updateCurrentPlan(e: PlanInput) {
     if (e.field === 'type') {
       setState('plan', 'type', e.value);
+      setState('plan', 'price', getPlanPrice(e.value));
     } else {
-      setState('plan', 'period', e.value);
+      setState('plan', 'period', e.value === 'year' ? 'month' : 'year');
+      setState('plan', 'price', getPlanPrice(state.plan.type));
     }
   }
 
   // ADD ONS SECTION
   function updateAddOns(e: AddOnTitle) {
-    if (state.addOns.includes(e)) {
-      setState(
-        'addOns',
-        state.addOns.filter((addOns) => addOns !== e)
-      );
+    const addOn = ADD_ONS.find((addOn) => addOn.title === e);
+    const selectedAddons = state.addOns.map((addOn) => addOn.title);
+
+    if (addOn && !selectedAddons.includes(addOn.title)) {
+      setState('addOns', [...state.addOns, addOn]);
     } else {
-      setState('addOns', [...state.addOns, e]);
+      const addOns = state.addOns.filter((addOn) => addOn.title !== e);
+      setState('addOns', addOns);
     }
   }
 

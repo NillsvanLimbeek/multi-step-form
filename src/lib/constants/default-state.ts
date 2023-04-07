@@ -9,8 +9,9 @@ export const defaultState: FormContextState = {
   },
   errors: {},
   plan: {
-    period: true,
+    period: 'month',
     type: 'advanced',
+    price: 12,
   },
   addOns: [],
 };

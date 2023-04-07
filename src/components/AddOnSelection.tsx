@@ -1,32 +1,22 @@
-import { Component, createSignal } from 'solid-js';
+import { Component } from 'solid-js';
 import classNames from 'classnames';
 
-import { AddOn, AddOnTitle } from '@/lib/types';
+import { AddOn, AddOnTitle, PeriodType } from '@/lib/types';
+import { formatPeriod, formatPrice, formatTitle } from '@/lib/utils';
 
 interface Props {
   addOn: AddOn;
   active: boolean;
-  yearly: boolean;
+  period: PeriodType;
   addAddOn: (e: AddOnTitle) => void;
 }
 
 export const AddOnSelection: Component<Props> = (props) => {
-  const [checked, setChecked] = createSignal(false);
-
-  function formatTitle(title: string) {
-    const formatted = title.split('-').join(' ');
-    return `${title.charAt(0).toUpperCase()}${formatted.slice(1)}`;
-  }
-
-  function formatPrice(price: number) {
-    return props.yearly ? price * 10 : price;
-  }
-
   return (
     <div
       class={classNames(
         'mb-4 flex w-[400px] items-center justify-between rounded-md border border-light-gray p-5',
-        { 'border-purple-blue bg-alabaster': checked() }
+        { 'border-purple-blue bg-alabaster': props.active }
       )}
     >
       <div class="flex items-center">
@@ -44,7 +34,10 @@ export const AddOnSelection: Component<Props> = (props) => {
         </div>
       </div>
 
-      <p class="text-purple-blue">+€{formatPrice(props.addOn.price)}/yr</p>
+      <p class="text-purple-blue">
+        +€{formatPrice(props.period, props.addOn.price)}/
+        {formatPeriod(props.period)}
+      </p>
     </div>
   );
 };

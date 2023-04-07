@@ -9,6 +9,10 @@ import { AddOnSelection } from '../AddOnSelection';
 export const AddOnSection: Component = () => {
   const [form, { updateCurrentSection, updateAddOns }] = useForm();
 
+  function getActiveAddOns() {
+    return form.addOns.map((addOn) => addOn.title);
+  }
+
   return (
     <section class="px-28 pt-10">
       <SectionHeader
@@ -21,8 +25,8 @@ export const AddOnSection: Component = () => {
           {(addOn) => (
             <AddOnSelection
               addOn={addOn}
-              yearly={form.plan.period}
-              active={form.addOns.includes(addOn.title)}
+              period={form.plan.period}
+              active={getActiveAddOns().includes(addOn.title)}
               addAddOn={(e) => updateAddOns(e)}
             />
           )}
@@ -36,7 +40,12 @@ export const AddOnSection: Component = () => {
         >
           Go Back
         </button>
-        <button class="btn bg-marine-blue hover:bg-blue-900">Next Step</button>
+        <button
+          class="btn bg-marine-blue hover:bg-blue-900"
+          onClick={() => updateCurrentSection('summary')}
+        >
+          Next Step
+        </button>
       </div>
     </section>
   );

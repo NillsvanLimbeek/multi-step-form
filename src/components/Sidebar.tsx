@@ -12,7 +12,7 @@ interface Props {
 
 export const Sidebar: Component<Props> = (props) => {
   return (
-    <aside class="relative">
+    <aside class="relative shrink-0 basis-[275px]">
       <img src={bg} alt="sidebar background" />
 
       <div class="absolute top-10 left-10">

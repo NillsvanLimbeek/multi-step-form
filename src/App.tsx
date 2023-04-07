@@ -6,13 +6,14 @@ import { PersonalSection } from '@components/sections/PersonalSection';
 import { Sidebar } from '@components/Sidebar';
 import { PlanSection } from '@components/sections/PlanSection';
 import { AddOnSection } from './components/sections/AddOnSection';
+import { SummarySection } from './components/sections/SummarySection';
 
 const App: Component = () => {
   const [form] = useForm();
 
   return (
     <main class="flex h-full w-full items-center justify-center bg-magnolia">
-      <div class="flex rounded-xl bg-white p-5">
+      <div class="flex h-[600px] w-[945px] rounded-xl bg-white p-5">
         <Sidebar activeSection={form.currentSection} />
 
         <Switch>
@@ -27,9 +28,13 @@ const App: Component = () => {
           <Match when={form.currentSection === 'add-ons'}>
             <AddOnSection />
           </Match>
+
+          <Match when={form.currentSection === 'summary'}>
+            <SummarySection />
+          </Match>
         </Switch>
 
-        <pre>{JSON.stringify(form, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(form, null, 2)}</pre> */}
       </div>
     </main>
   );

@@ -1,16 +1,17 @@
-import { AddOnTitle } from './add-on';
+import { AddOn, AddOnTitle } from './add-on';
 import { Personal } from './personal';
-import { PlanInput, PlanType } from './plan';
+import { PeriodType, PlanInput, PlanType } from './plan';
 
 type FormContextState = {
   currentSection: CurrentSection;
   personal: Personal;
   errors: Partial<Personal>;
   plan: {
-    period: boolean; // true : 'year' ? 'month'
+    period: PeriodType;
     type: PlanType;
+    price: number;
   };
-  addOns: AddOnTitle[];
+  addOns: AddOn[];
 };
 
 type FormContextValue = [
