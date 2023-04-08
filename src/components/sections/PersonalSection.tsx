@@ -41,7 +41,7 @@ export const PersonalSection: Component = () => {
           setValue={(e) => updatePersonalField('phoneNumber', e)}
         />
 
-        <div class="flex h-[33%] items-end justify-end">
+        <div class="flex grow items-end justify-end">
           <input
             type="submit"
             class="btn bg-marine-blue hover:bg-blue-900"

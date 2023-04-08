@@ -7,6 +7,7 @@ import { Sidebar } from '@components/Sidebar';
 import { PlanSection } from '@components/sections/PlanSection';
 import { AddOnSection } from './components/sections/AddOnSection';
 import { SummarySection } from './components/sections/SummarySection';
+import { FinalSection } from './components/sections/FinalSection';
 
 const App: Component = () => {
   const [form] = useForm();
@@ -32,9 +33,11 @@ const App: Component = () => {
           <Match when={form.currentSection === 'summary'}>
             <SummarySection />
           </Match>
-        </Switch>
 
-        {/* <pre>{JSON.stringify(form, null, 2)}</pre> */}
+          <Match when={form.currentSection === 'thank-you'}>
+            <FinalSection />
+          </Match>
+        </Switch>
       </div>
     </main>
   );

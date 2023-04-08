@@ -38,6 +38,8 @@
   }
 
   .form-height {
-    height: calc(100% - 135px);
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 105px);
   }
 }

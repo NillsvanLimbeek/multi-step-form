@@ -1,7 +1,7 @@
-import { Component, For } from 'solid-js';
+import { Component, For, Show } from 'solid-js';
 
 import { useForm } from '@/lib/context/use-form';
-import { formatPeriod, formatPrice, formatTitle } from '@/lib/utils';
+import { formatPeriod, formatPrice } from '@/lib/utils';
 
 import { SectionHeader } from '../SectionHeader';
 import { AddOnSummary } from '../AddOnSummary';
@@ -17,7 +17,7 @@ export const SummarySection: Component = () => {
   }
 
   return (
-    <section class="px-28 pt-10">
+    <section class="flex flex-col px-28 pt-10">
       <SectionHeader
         title="Finishing up"
         subtitle="Double-check everything looks OK before confirming"
@@ -30,7 +30,12 @@ export const SummarySection: Component = () => {
               {form.plan.type} ({form.plan.period})
             </h2>
 
-            <p>Change</p>
+            <button
+              class="cursor-pointer text-cool-gray underline hover:text-purple-blue"
+              onClick={() => updateCurrentSection('plan')}
+            >
+              Change
+            </button>
           </div>
 
           <p class="font-semibold text-marine-blue">
@@ -38,17 +43,19 @@ export const SummarySection: Component = () => {
           </p>
         </div>
 
-        <div class="divider" />
+        <Show when={form.addOns.length}>
+          <div class="divider" />
 
-        <For each={form.addOns}>
-          {(addOn) => (
-            <AddOnSummary
-              title={addOn.title}
-              price={addOn.price}
-              period={form.plan.period}
-            />
-          )}
-        </For>
+          <For each={form.addOns}>
+            {(addOn) => (
+              <AddOnSummary
+                title={addOn.title}
+                price={addOn.price}
+                period={form.plan.period}
+              />
+            )}
+          </For>
+        </Show>
       </div>
 
       <div class="flex justify-between px-5">
@@ -58,19 +65,19 @@ export const SummarySection: Component = () => {
         </p>
       </div>
 
-      <div class="flex h-[20%] w-full items-end justify-between">
+      <div class="flex w-full grow items-end justify-between">
         <button
           class="font-semibold text-marine-blue hover:text-blue-800"
           onClick={() => updateCurrentSection('add-ons')}
         >
           Go Back
         </button>
-        {/* <button
+        <button
           class="btn bg-marine-blue hover:bg-blue-900"
-          onClick={() => updateCurrentSection('summary')}
+          onClick={() => updateCurrentSection('thank-you')}
         >
-          Next Step
-        </button> */}
+          Confirm
+        </button>
       </div>
     </section>
   );

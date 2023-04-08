@@ -26,6 +26,6 @@ type FormContextValue = [
 ];
 
 type Field = 'name' | 'email' | 'phoneNumber';
-type CurrentSection = 'personal' | 'plan' | 'add-ons' | 'summary';
+type CurrentSection = 'personal' | 'plan' | 'add-ons' | 'summary' | 'thank-you';
 
 export type { FormContextState, FormContextValue, Field, CurrentSection };

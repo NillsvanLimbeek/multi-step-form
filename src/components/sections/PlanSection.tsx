@@ -14,7 +14,7 @@ export const PlanSection: Component = () => {
   function updatePlan(e: PlanInput) {}
 
   return (
-    <section class="px-28 pt-10">
+    <section class="flex flex-col px-28 pt-10">
       <SectionHeader
         title="Select your plan"
         subtitle="You have the option of monthly or yearly billing"
@@ -58,7 +58,7 @@ export const PlanSection: Component = () => {
         </p>
       </div>
 
-      <div class="flex h-[33%] w-full items-end justify-between">
+      <div class="flex w-full grow items-end justify-between">
         <button
           class="font-semibold text-marine-blue hover:text-blue-800"
           onClick={() => updateCurrentSection('personal')}
